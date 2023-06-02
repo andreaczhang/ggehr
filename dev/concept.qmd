@@ -1,0 +1,65 @@
+---
+title: "Conceptualization"
+format: 
+  html:
+    toc: true
+    toc-depth: 2
+    code-fold: false
+    code-tools: false
+---
+
+## What to consider
+
+#### Subject grouping 
+
+* one group 
+* two groups (g1, g2: such as gender)
+* more groups 
+  * one factor (f1, f2, f3: such as age groups)
+  * more than one factor (g1f1, g1f2, ...)
+
+Note that some factors (such as smoking, asthma etc) are not controlled in the design: they objectively exist in your data when you collect them. Unless explicitly matching on these factors.
+
+(For now we do not consider advanced topics from experiment design)
+
+#### Outcomes
+
+* continuous (e.g. normal, uniform)
+* categorical (binary, or more categories)
+* survival/time-to-event
+
+#### Data generating process (fixed design)
+
+It is possible to simulate with, or without known **functional causal relationship**.
+
+* Without: need to specify the parameters for each input combination directly; but not as a function of the input.
+* With: outcome is a function of the inputs. 
+  * Can arise from DAG. (MSM)
+  * Can have mediation effect.
+
+(For now we do not consider adaptive and sequential designs)
+
+#### Missing pattern 
+
+Missing at random, or else
+
+Dropouts (at a later point)
+
+
+
+## Simulate without functional causal relationship 
+
+
+```{r}
+#| eval: false
+# 1 + 1
+```
+
+
+
+
+
+## Simulate with functional causal relationship
+
+
+
