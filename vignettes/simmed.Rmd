@@ -1,0 +1,21 @@
+---
+title: "simmed"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{simmed}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This is an ongoing project. 
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(simmed)
+```

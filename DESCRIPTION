@@ -1,0 +1,22 @@
+Package: simmed
+Title: Structual and Modular Medical Data Simulation for Education 
+Version: 2023.06.02
+Authors@R: 
+    person("Chi", "Zhang", , "andreachizhang@yahoo.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-0501-5909"))
+Description: This package has structual and modular medical data simulation for education created using the grammar of simulation. 
+License: MIT + file LICENSE
+URL: https://github.com/andreaczhang/simmed
+BugReports: https://github.com/andreaczhang/simmed/issues
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 3.5.0)
+LazyData: true
+VignetteBuilder: knitr
