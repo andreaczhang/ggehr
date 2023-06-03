@@ -1,0 +1,10 @@
+pandoc: 2.19.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  simmed: simmed.html
+last_built: 2023-06-03T08:55Z
+urls:
+  reference: https://andreaczhang.github.io/simmed/reference
+  article: https://andreaczhang.github.io/simmed/articles
+
