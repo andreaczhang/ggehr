@@ -8,4 +8,4 @@ Cran task views
 
 [Mixed model](https://cran.r-project.org/web/views/MixedModels.html)
 
-
+[SimEngine](https://avi-kenny.github.io/SimEngine/examples/1) by Avi Kenny (quite interesting)
