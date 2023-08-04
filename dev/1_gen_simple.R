@@ -118,6 +118,7 @@ summary(lmm2)
 # beta2: 39.807. it is the difference between B and C
 
 # (multcomp) ----
+# https://stats.stackexchange.com/questions/436618/how-to-test-between-level-significance-in-logistic-regression
 # use multcomp to systematically compare
 library(multcomp)
 ?multcomp::glht # general linear hypotheses
@@ -189,21 +190,27 @@ table(df)
 lr <- glm(y ~ x, family = 'binomial')
 summary(lr)
 
-# b0 = 2.197
-# b1 = -1.698 (red - black)
-# b2 = 3.584 (white - black)
+# b0 = 1.872
+# b1 = -1.738 (red - black)
+# b2 = -2.625 (white - black)
 # remember this is beta, not OR
 
 # do multcomp
 # black is baseline
-contr <- rbind("red - black" = c(-1, 1, 0), # b1
-               "white - black" = c(-1, 0, 1), # b2
-               "white - red" = c(0, -1, 1)) # b2-b1
+contr <- rbind("red - black" = c(-1, 1, 0), # b1, -1.738
+               "white - black" = c(-1, 0, 1), # b2, -2.625
+               "white - red" = c(0, -1, 1)) # -0.887
 comp <- glht(lr, linfct = mcp(x = contr))
 summary(comp)
 
+b1 <- -1.7383
+b2 <- -2.6256
+b2-b1 # -0.887
 
-b2-b0
-
+# df <- data.frame(x, y)
+# instead of black, use red as baseline
+df$x2 <- relevel(df$x, 'red')
+lr2 <- glm(y ~ x2, data = df, family = 'binomial')
+summary(lr2)
 
 
