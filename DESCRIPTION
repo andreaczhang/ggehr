@@ -1,13 +1,13 @@
-Package: simmed
-Title: Structual and Modular Medical Data Simulation for Education 
-Version: 2023.06.02
+Package: ggehr
+Title: Visualize Electronic Health Records data in an intuitive way.
+Version: 2024.04.02
 Authors@R: 
     person("Chi", "Zhang", , "andreachizhang@yahoo.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0501-5909"))
 Description: This package has structual and modular medical data simulation for education created using the grammar of simulation. 
 License: MIT + file LICENSE
-URL: https://github.com/andreaczhang/simmed
-BugReports: https://github.com/andreaczhang/simmed/issues
+URL: https://github.com/andreaczhang/ggehr
+BugReports: https://github.com/andreaczhang/ggehr/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

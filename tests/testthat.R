@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(simmed)
+library(ggehr)
 
-test_check("simmed")
+test_check("ggehr")

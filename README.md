@@ -1,4 +1,5 @@
-# simmed
-An R package to simulate medical data in a structural, modular and flexible way for education. Analogy to Grammar of Graphics
+# ggehr
+
+Visualize data from Electronic Health Records in a intuitive way.
 
 Status: early development
