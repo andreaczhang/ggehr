@@ -63,7 +63,7 @@ ggplot(dd, aes(x = time, y = event)) +
   
   
   
-# ----- _____
+# _____----- 
 # if need to add more text information
 dt <- data.frame(title = 'c', name = '2')
 dt
