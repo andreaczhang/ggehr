@@ -4,7 +4,7 @@ Version: 2024.04.02
 Authors@R: 
     person("Chi", "Zhang", , "andreachizhang@yahoo.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0501-5909"))
-Description: This package has structual and modular medical data simulation for education created using the grammar of simulation. 
+Description: This package aims to visualize Electronic Health Records in a intuitive way. Early development
 License: MIT + file LICENSE
 URL: https://github.com/andreaczhang/ggehr
 BugReports: https://github.com/andreaczhang/ggehr/issues

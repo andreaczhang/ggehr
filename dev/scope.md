@@ -22,9 +22,9 @@ target drug of interest; beyond target drug
 
 
 
-## Group level
+## Group level (prepare for multi-state modeling)
 
-Matching 
+events connected by 
 
 
 
