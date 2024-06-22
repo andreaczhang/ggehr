@@ -1,4 +1,4 @@
-#' A simple placehold function 
+#' A simple placeholder function 
 #'
 #' @param x a numeric value
 #'
