@@ -5416,7 +5416,7 @@ jQuery.event = {
 
 			j = 0;
 			while ( ( handleObj = matched.handlers[ j++ ] ) &&
-				!event.iggehriatePropagationStopped() ) {
+				!event.isImmediatePropagationStopped() ) {
 
 				// If the event is namespaced, then each handler is only invoked if it is
 				// specially universal or its namespaces are a superset of the event's.
@@ -5762,7 +5762,7 @@ jQuery.Event.prototype = {
 	constructor: jQuery.Event,
 	isDefaultPrevented: returnFalse,
 	isPropagationStopped: returnFalse,
-	iggehriatePropagationStopped: returnFalse,
+	isImmediatePropagationStopped: returnFalse,
 	isSimulated: false,
 
 	preventDefault: function() {
@@ -5786,7 +5786,7 @@ jQuery.Event.prototype = {
 	stopImmediatePropagation: function() {
 		var e = this.originalEvent;
 
-		this.iggehriatePropagationStopped = returnTrue;
+		this.isImmediatePropagationStopped = returnTrue;
 
 		if ( e && !this.isSimulated ) {
 			e.stopImmediatePropagation();

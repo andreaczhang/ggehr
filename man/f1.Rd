@@ -2,7 +2,7 @@
 % Please edit documentation in R/simple.R
 \name{f1}
 \alias{f1}
-\title{A simple placehold function}
+\title{A simple placeholder function}
 \usage{
 f1(x)
 }
@@ -13,7 +13,7 @@ f1(x)
 a value 3 greater than the input
 }
 \description{
-A simple placehold function
+A simple placeholder function
 }
 \examples{
 f1(5)

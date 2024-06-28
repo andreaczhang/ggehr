@@ -2,4 +2,7 @@
 
 Visualize data from Electronic Health Records in a intuitive way.
 
-Status: early development
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/andreaczhang/ggehr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andreaczhang/ggehr/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->

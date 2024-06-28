@@ -16,7 +16,7 @@ ablist_who[Category == 'Access', color_code := 'green']
 ablist_who[Category == 'Watch', color_code := 'yellow']
 ablist_who[Category == 'Reserve', color_code := 'red']
 
-
+head(ablist_who)
 
 
 # ahus specific ----
