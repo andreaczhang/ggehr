@@ -1,4 +1,4 @@
-# ggehr
+# ggehr <a href="https://andreaczhang.github.io/ggehr/"><img src="man/figures/hex_ggehr.png" align="right" width="150" /></a>
 
 Visualize data from Electronic Health Records in a intuitive way.
 
