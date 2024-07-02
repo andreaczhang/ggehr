@@ -1,6 +1,6 @@
 # development code for ab prescription and use 
 
-library(readxl)
+# library(readxl)
 library(dplyr)
 library(ggplot2)
 library(ggtext)
@@ -10,25 +10,26 @@ library(ggiraph)
 
 
 # fake data from ahus
-demographics <- read_excel("~/Documents/Data/ahus/ahus_ehr_sample.xlsx", sheet = "Demograpphics")
+# demographics <- read_excel("~/Documents/Data/ahus/ahus_ehr_sample.xlsx", sheet = "Demograpphics")
 # catheters <- read_excel("~/Documents/Data/ahus/ahus_ehr_sample.xlsx", sheet = "Tube")
-abpres <- read_excel("~/Documents/Data/ahus/ahus_ehr_sample.xlsx", sheet = "AB_pres")
-abuse <- read_excel("~/Documents/Data/ahus/ahus_ehr_sample.xlsx", sheet = "ABU")
+# abpres <- read_excel("~/Documents/Data/ahus/ahus_ehr_sample.xlsx", sheet = "AB_pres")
+# abuse <- read_excel("~/Documents/Data/ahus/ahus_ehr_sample.xlsx", sheet = "ABU")
 # location <- read_excel("~/Documents/Data/ahus/ahus_ehr_sample.xlsx", sheet = "Location")
 
+# call datasets directly from the package
+# ggehr::demographics
+demographics
+ab_prescription
+ab_use
 
 
 
 
 # try patient 1, abuse 
-d1 <- filter(abuse, ID == 1)
-d1
+# d1 <- dplyr::filter(ab_use, ID == 1)
+# d1
 # two drugs, different doses
 
-
-# the drug_df should have standard names
-abuse <- rename(abuse, label = ab_name)
-abuse <- rename(abuse, method = ab_method)
 
 
 
@@ -62,13 +63,22 @@ make_event_drug_use <- function(drug_df,
 }
 
 
+# the drug_df should have standard names
+ab_use <- rename(ab_use, label = ab_name)
+ab_use <- rename(ab_use, method = ab_method)
 
+# get the information
+ablist <- ggehr::ab_ahus
 
-
-d1 <- filter(abuse, ID == 1)
+d1 <- filter(ab_use, ID == 1)
 d1
 
-d1c <- left_join(d1, ablist_ahus, join_by(label == Norsk_AHUS))
+d1c <- left_join(d1, ablist, join_by(label == Norsk_AHUS))
+
+
+
+
+# this is the step to make event
 
 d1_full <- make_event_drug_use(d1c)
 # d1_full <- make_event_drug_use(d1, tmin = 2254, tmax = 2254+112)
@@ -81,37 +91,71 @@ head(d1_full)
 
 # ________ ----
 # plot ----
+# basic tile plot
 p <- ggplot(d1_full, aes(x = time, y = label)) + 
   geom_tile(aes(fill = event), color = 'white') 
 
 p
 
 
+
+
 # change color ----
 d1_full
+d1_full$time |> max()
 
 # d1c <- left_join(d1_full, ablist_ahus, join_by(label == Norsk_AHUS))
 
-p <- ggplot(d1_full, aes(x = time, y = label)) 
-p <- p + geom_tile(aes(fill = color_code)) 
-p <- p + scale_fill_manual(breaks = abgroup, 
-                           values = colorsab, 
-                           na.value = 'transparent')
-p <- p + theme_bw()
-p
-
-abgroup <- c('yellow',
-                'green',
-                'red')
-
-colorsab <- c('#f0c11a', 
-               '#048a04', 
-               '#a11c15')
 
 
 
 
 
+
+plot_drug_use <- function(data_drug_use){
+  
+  if(!'Category' %in% colnames(data_drug_use)){stop('Need drug category')}
+  
+  # information for WHO ab color category
+  ab_category <- c('Access','Watch','Reserve')
+  ab_color <- c('#048a04','#f0c11a','#a11c15')
+  
+  
+  p <- ggplot(data_drug_use, aes(x = time, y = label)) 
+  p <- p + geom_tile(aes(fill = Category)) 
+  p <- p + theme_bw()
+  
+  # modify color
+  p <- p + scale_fill_manual(breaks = ab_category, 
+                             values = ab_color, 
+                             na.value = 'transparent')
+  # make axis 45 degrees
+  p <- p + theme(axis.text.x = element_text(angle = 45, vjust = 0.5))
+  # add more ticks
+  p <- p + scale_x_continuous(breaks = breakpoints)
+  
+  # remove x, y axis title
+  p <- p + theme(axis.title.y = element_blank(), 
+                 axis.title.x = element_blank())
+  p <- p + theme(panel.grid.minor = element_blank())
+  p <- p + theme(panel.grid.major.y = element_blank())
+  # legend title (optional)
+  p <- p + labs(fill = 'AWaRe')
+  p
+  return(p)
+  
+}
+
+plot_drug_use(data = d1_full)
+
+
+
+breakpoints <- function(x, n=8){
+  # this function is to be used in the ggplot to set breakpoints
+  # x <- 2250:2500
+  br <- pretty(x, n = n)
+  br
+}
 # when there are lots of time points, the color becomes hard to distinguish
 # natural extension: time t0 tmax plot against t admission and discharge
 
@@ -119,26 +163,34 @@ colorsab <- c('#f0c11a',
 # ab prescription -----
 # ab prescription time on the plot
 # add a table 
-
-abpres
-abp1 <- filter(abpres, ID == 1)
+?ab_prescription
+ab_prescription
+abp1 <- filter(ab_prescription, ID == 1)
 abp1
 
 p + geom_point(data = abp1[c(1,4),], aes(x = time, y = ab_name))
 p + geom_point(data = abp1, aes(x = time, y = ab_name))
 
+plot_drug_prescribe <- function(data_prescribe, plot_obj){
+  
+  # TO DO:
+  # should also return data for checks
+  # should allow disabling unused drugs 
+  p <- plot_obj + geom_point(data = data_prescribe, 
+                             aes(x = time, 
+                                 y = ab_name))
+  return(p)
+}
 
 
 
 # prescription table ----#
 # dt <- data.frame(title = 'c', name = '2')
 
-dt <- abp1[, c(3, 6, 7)]
-dt
-gt <- gridExtra::tableGrob(dt)
-
-
-gridExtra::grid.arrange(p, gt)
+# dt <- abp1[, c(3, 6, 7)]
+# dt
+# gt <- gridExtra::tableGrob(dt)
+# gridExtra::grid.arrange(p, gt)
 
 
 # rather than table, might be more suitable for interactivitiy ontop of the dots
@@ -146,24 +198,44 @@ gridExtra::grid.arrange(p, gt)
 # tooltip: column of data to display
 # data_id: 
 
-pinter <- p + geom_point_interactive(data = abp1, 
-                                     aes(x = time, 
-                                         y = ab_name,
-                                         tooltip = purpose, 
-                                         data_id = purpose), 
-                                     size = 3, hover_nearest = T)
+p1 <- plot_drug_use(data_drug_use = d1_full)
+plot_drug_prescribe(data_prescribe = abp1, plot_obj = p1)
 
-# any other text need to be added before girafe it!
+plot_drug_prescribe_interactive(data_prescribe = abp1, plot_obj = p1)
 
-ppp <- girafe(ggobj = pinter, 
-              width_svg = 8,
-              height_svg = 4,
-              options = list(
-                opts_hover(css = "fill:black; stroke: yellow;"),
-                opts_hover_inv(css = "opacity:0.2;"),
-                opts_zoom(max = 10)
-              ))
-ppp
+plot_drug_prescribe_interactive <- function(data_prescribe, 
+                                           plot_obj){
+  
+  # TO DO: 
+  # more tweaking on the font size
+  # create interactive obj 
+  pint <-  plot_obj + ggiraph::geom_point_interactive(
+    data = data_prescribe, 
+    aes(x = time, 
+        y = ab_name,
+        tooltip = purpose, 
+        data_id = purpose), 
+    size = 3, 
+    hover_nearest = T)
+  
+  # pass into girafe
+  p <- ggiraph::girafe(ggobj = pint, 
+                      width_svg = 8,
+                      height_svg = 4,
+                      options = list(
+                        opts_hover(css = "fill:black; stroke: yellow;"),
+                        opts_hover_inv(css = "opacity:0.2;"),
+                        opts_zoom(max = 10)
+                      ))
+  
+  p
+ return(p)
+
+}
+
+
+
+
 
 
 
@@ -242,7 +314,7 @@ make_demographic_info <- function(demo_df,
   }
   
   # make a paragraph or bullet points containing these information 
-  title_text <- 'Patient record'
+  title_text <- 'Patient record (Demo)'
   
   # arrange the text ----# 
   # line 1: title
@@ -272,25 +344,51 @@ make_demographic_info <- function(demo_df,
 
 
 
-p + labs(title = text) + 
-  theme(
-    plot.title.position = "plot",
-    plot.title = element_textbox_simple(
-      size = 15,
-      lineheight = 1,
-      padding = margin(5.5, 5.5, 5.5, 5.5),
-      margin = margin(0, 0, 5.5, 0),
-      halign = 0.5,
-      r = grid::unit(3, 'pt'),
-      fill = "lightgrey"
-    ))
+# p + labs(title = text) + 
+#   theme(
+#     plot.title.position = "plot",
+#     plot.title = element_textbox_simple(
+#       size = 15,
+#       lineheight = 1,
+#       padding = margin(5.5, 5.5, 5.5, 5.5),
+#       margin = margin(0, 0, 5.5, 0),
+#       halign = 0.5,
+#       r = grid::unit(3, 'pt'),
+#       fill = "lightgrey"
+#     ))
 
 
 
 
 demop1 <- filter(demographics, ID == 1)
 text_p1 <- make_demographic_info(demo_df = demop1)
-pinter <- pinter + labs(title = text_p1) + 
+
+p1 <- plot_drug_use(data_drug_use = d1_full)
+p1p <- plot_drug_prescribe(data_prescribe = abp1, plot_obj = p1)
+
+
+plot_info_demographic(info_text = text_p1, plot_obj = p1p)
+
+plot_info_demographic <- function(info_text, plot_obj){
+  
+  p <- plot_obj + labs(title = info_text) + 
+    theme(
+      plot.title.position = "plot",
+      plot.title = element_textbox_simple(
+        size = 15,
+        lineheight = 1,
+        padding = margin(5.5, 5.5, 5.5, 5.5),
+        margin = margin(0, 0, 5.5, 0),
+        halign = 0.5,
+        r = grid::unit(3, 'pt'),
+        fill = "lightgrey"
+      ))
+  
+  return(p)
+}
+
+
+p1p + labs(title = text_p1) + 
   theme(
     plot.title.position = "plot",
     plot.title = element_textbox_simple(
@@ -305,8 +403,74 @@ pinter <- pinter + labs(title = text_p1) +
 
 
 
+# ________ ----
+# TESTS ----
+
+ab_use <- ggehr::ab_use
+ab_prescription <- ggehr::ab_prescription
+demographics <- ggehr::demographics
 
 
+# the drug_df should have standard names
+ab_use <- rename(ab_use, label = ab_name)
+ab_use <- rename(ab_use, method = ab_method)
+
+# get the information on drugs
+abinfo <- ggehr::ab_ahus
+
+
+# extract drug use for patient id
+id <- 5
+
+dpatient_demog <- filter(demographics, ID == id)
+
+dpatient_drug <- filter(ab_use, ID == id)
+dpatient_drug
+
+# add drug information 
+dpatient_drug <- left_join(dpatient_drug, abinfo, 
+                           join_by(label == Norsk_AHUS))
+
+
+# this is the step to make event
+# should use admin and discharge times
+tadmin <- dpatient_demog$t0
+tdischarge <- tadmin + dpatient_demog$los
+d <- make_event_drug_use(dpatient_drug, 
+                         tmin = tadmin, 
+                         tmax = tdischarge)
+
+# d1_full <- make_event_drug_use(d1, tmin = 2254, tmax = 2254+112)
+
+dpatient_presc <- filter(ab_prescription, ID == id)
+
+dpatient_demoinfo <- make_demographic_info(demo_df = dpatient_demog)
+
+
+
+
+# plots
+
+p1 <- plot_drug_use(data_drug_use = d)
+p1
+p1p <- plot_drug_prescribe(data_prescribe = dpatient_presc, 
+                           plot_obj = p1)
+p1p
+
+p1pp <- plot_info_demographic(info_text = dpatient_demoinfo, 
+                      plot_obj = p1)
+
+# if want interactive: 
+# generate the figure with info
+# then make it into interactive
+plot_drug_prescribe_interactive(data_prescribe = dpatient_presc, 
+                                plot_obj = p1pp)
+
+# might have to include the time limits regardless
+# id = 4: drug use data 
+# id = 5
+# id = 6: many entries. some are hard to read - might be useful if enhance
+# id = 7: merge stage has warning
 
 
 
