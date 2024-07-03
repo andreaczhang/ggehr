@@ -420,7 +420,7 @@ abinfo <- ggehr::ab_ahus
 
 
 # extract drug use for patient id
-id <- 5
+id <- 6
 
 dpatient_demog <- filter(demographics, ID == id)
 
