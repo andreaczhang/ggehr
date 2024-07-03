@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="index.html">ggehr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2024.04.02</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,10 +67,39 @@
 <div class="page-header"><h1 id="ggehr-">ggehr <a href="https://andreaczhang.github.io/ggehr/"><img src="reference/figures/hex_ggehr.png" align="right" width="150"></a>
 <a class="anchor" aria-label="anchor" href="#ggehr-"></a>
 </h1></div>
-<p>Visualize data from Electronic Health Records in a intuitive way.</p>
 <!-- badges: start -->
 
 </div>
+<div class="section level1">
+<h1 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h1>
+<p><code>ggehr</code> (read: gg E-H-R) stands for <strong>ggplot2 extension for EHR data</strong>, which provides a set of tools to facilitate EHR (Electronic Health Records) visualization.</p>
+<p><code>ggehr</code> package helps you make visualize EHR data, so that you can</p>
+<ul>
+<li>have an overview of the <strong>mixed type information</strong> related to a patient;</li>
+<li>visually <strong>identify the errors</strong> in data recording.</li>
+</ul>
+<div class="section level2">
+<h2 id="why-ggehr">Why ggehr?<a class="anchor" aria-label="anchor" href="#why-ggehr"></a>
+</h2>
+<p>Electronic Health Records (EHR) data are patient records collected in healthcare facilities such as hospitals and clinics. Examples of hospital EHR data include demographics, admission information as well as treatments (drugs, procedures). This type of data is known to be messy and prone to error.</p>
+<p>In principle all data generated in real-life contain time stamps; yet in practice we tend to omit the time information. When it comes EHR data it is essential that we keep the time stamps, as they provide valuable information on what treatments and procedures have the patients been going through. Broadly speaking,</p>
+<ul>
+<li>temporal data: <strong>treatments</strong> (drug, procedures, locations)</li>
+<li>static data: <strong>demographics, admission information</strong>
+</li>
+</ul>
+<p>As EHR data are usually scattered across different tables, it is beneficial to collect them altogether and visualize in one or two graphs.</p>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>The package is <em>not yet ready for release</em>. However if you wish, the development version an be installed from GitHub with</p>
+<pre><code><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"andreaczhang/ggehr"</span><span class="op">)</span></span></code></pre>
+</div>
+</div>
+
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">

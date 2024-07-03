@@ -1,8 +1,8 @@
 Package: ggehr
 Title: Visualize Electronic Health Records data in an intuitive way
-Version: 2024.04.02
+Version: 0.0.0.9000
 Authors@R: 
-    person("Chi", "Zhang", , "andreachizhang@yahoo.com", role = c("aut", "cre"),
+    person("Chi", "Zhang", , "chizapoth@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0501-5909"))
 Description: This package aims to visualize Electronic Health Records in a intuitive way. This package is in its early development stage.
 License: MIT + file LICENSE

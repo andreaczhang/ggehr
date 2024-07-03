@@ -1,13 +1,14 @@
 ---
-title: "ggehr"
+title: "Introduction to ggehr"
+author: "Chi Zhang"
+date: "2024-07-03"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{ggehr}
+  %\VignetteIndexEntry{Introduction to ggehr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-This is an ongoing project. 
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -15,6 +16,20 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+Electronic Health Records (EHR) data are patient records collected in healthcare facilities such as hospitals and clinics. Examples of hospital EHR data include demographics, admission information as well as treatments (drugs, procedures). This type of data is known to be messy and prone to error. 
+
+The `ggehr` (read: gg E-H-R) package helps you make visualize EHR data, so that you can 
+
+* have an overview of the mixed type information related to a patient;
+* identify the errors in data recording.
+
+In principle all data generated in real-life contain time stamps; yet in practice we tend to omit the time information. When it comes EHR data it is essential that we keep the time stamps, as they provide valuable information on what treatments and procedures have the patients been going through. Broadly speaking, 
+
+* temporal data: treatments (drug, procedures, locations)
+* static data: demographics, admission information
+
+As EHR data are usually scattered across different tables, it is beneficial to collect them altogether and visualize in one or two graphs. 
 
 ```{r setup}
 library(ggehr)

@@ -154,7 +154,7 @@ p + geom_point(data = abp1, aes(x = time, y = ab_name))
 
 # locations ----
 
-location
+location <- ggehr::location
 loc1 <- filter(location, ID == 1)
 loc1
 
@@ -177,6 +177,14 @@ filter(dmerge, event_label == 'Yes')
 
 p2 <- ggplot(dmerge, aes(x = time, y = post)) + 
   geom_tile(aes(fill = event_label), color = 'white') 
+p2
+
+
+
+de <- data.frame(x = 1:5, y = rep(1, 5), z = c('a', 'a', 'b', 'b', 'b'))
+ggplot(de, aes(x = x, y = y)) + geom_tile(aes(fill = z))
+
+
 
 library(patchwork)
 p + p2 + plot_layout(ncol = 1)
