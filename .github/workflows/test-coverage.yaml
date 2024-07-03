@@ -44,7 +44,8 @@ jobs:
           file: ./cobertura.xml
           plugin: noop
           disable_search: true
-          token: ${{ secrets.CODECOV_TOKEN }}
+          repo-token: ${{ secrets.token }}
+          configuration-path: ${{ inputs.config-path }}
 
       - name: Show testthat output
         if: always()
