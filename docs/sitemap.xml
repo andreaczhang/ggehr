@@ -40,6 +40,9 @@
     <loc>https://andreaczhang.github.io/ggehr/reference/ab_who.html</loc>
   </url>
   <url>
+    <loc>https://andreaczhang.github.io/ggehr/reference/breakpoints.html</loc>
+  </url>
+  <url>
     <loc>https://andreaczhang.github.io/ggehr/reference/catheters.html</loc>
   </url>
   <url>
@@ -52,7 +55,37 @@
     <loc>https://andreaczhang.github.io/ggehr/reference/index.html</loc>
   </url>
   <url>
+    <loc>https://andreaczhang.github.io/ggehr/reference/loc_expand.html</loc>
+  </url>
+  <url>
     <loc>https://andreaczhang.github.io/ggehr/reference/location.html</loc>
+  </url>
+  <url>
+    <loc>https://andreaczhang.github.io/ggehr/reference/location_meta.html</loc>
+  </url>
+  <url>
+    <loc>https://andreaczhang.github.io/ggehr/reference/make_demographic_info.html</loc>
+  </url>
+  <url>
+    <loc>https://andreaczhang.github.io/ggehr/reference/make_event_drug_use.html</loc>
+  </url>
+  <url>
+    <loc>https://andreaczhang.github.io/ggehr/reference/make_location.html</loc>
+  </url>
+  <url>
+    <loc>https://andreaczhang.github.io/ggehr/reference/plot_drug_prescribe.html</loc>
+  </url>
+  <url>
+    <loc>https://andreaczhang.github.io/ggehr/reference/plot_drug_prescribe_interactive.html</loc>
+  </url>
+  <url>
+    <loc>https://andreaczhang.github.io/ggehr/reference/plot_drug_use.html</loc>
+  </url>
+  <url>
+    <loc>https://andreaczhang.github.io/ggehr/reference/plot_info_demographic.html</loc>
+  </url>
+  <url>
+    <loc>https://andreaczhang.github.io/ggehr/reference/plot_location.html</loc>
   </url>
   <url>
     <loc>https://andreaczhang.github.io/ggehr/reference/x.html</loc>

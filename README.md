@@ -26,6 +26,10 @@ In principle all data generated in real-life contain time stamps; yet in practic
 
 As EHR data are usually scattered across different tables, it is beneficial to collect them altogether and visualize in one or two graphs. 
 
+![fig1](/Users/chizhang/Documents/GitHub/ggehr/inst/fig/fig1.png)
+
+More detailed example please see 'Get Started'.
+
 ## Installation 
 
 The package is *not yet ready for release*. However if you wish, the development version an be installed from GitHub with 
@@ -34,6 +38,8 @@ The package is *not yet ready for release*. However if you wish, the development
 # install.packages("devtools")
 devtools::install_github("andreaczhang/ggehr")
 ```
+
+
 
 
 

@@ -33,4 +33,102 @@ As EHR data are usually scattered across different tables, it is beneficial to c
 
 ```{r setup}
 library(ggehr)
+library(ggplot2)
+library(dplyr)
+```
+
+
+
+```{r}
+ab_use <- ggehr::ab_use
+ab_prescription <- ggehr::ab_prescription
+demographics <- ggehr::demographics
+loc <- ggehr::location
+
+# the drug_df should have standard names
+ab_use <- dplyr::rename(ab_use, label = ab_name)
+ab_use <- dplyr::rename(ab_use, method = ab_method)
+
+# get the information on drugs
+abinfo <- ggehr::ab_ahus
+```
+
+
+
+```{r}
+id <- 1
+
+dpatient_demog <- filter(demographics, ID == id)
+dpatient_drug <- filter(ab_use, ID == id)
+dpatient_presc <- filter(ab_prescription, ID == id)
+dpatient_loc <- filter(loc, ID == id)
+
+# add drug information 
+dpatient_drug <- left_join(dpatient_drug, abinfo, 
+                           join_by(label == Norsk_AHUS))
+
+# this is the step to make event
+# should use admin and discharge times
+tadmin <- dpatient_demog$t0
+tdischarge <- tadmin + dpatient_demog$los
+
+
+
+# drug use ----#
+d <- make_event_drug_use(dpatient_drug, 
+                         tmin = tadmin, 
+                         tmax = tdischarge)
+```
+
+```{r}
+# demographics ----# 
+dpatient_demoinfo <- make_demographic_info(demo_df = dpatient_demog)
+
+
+
+
+# location ----#
+dloc <- make_location(data_location = dpatient_loc, 
+                      tadmin = dpatient_demog$t0, 
+                      los = dpatient_demog$los)
+
+```
+
+
+
+```{r}
+# drug use 
+p1 <- plot_drug_use(data_drug_use = d)
+p1
+# drug prescription
+p1p <- plot_drug_prescribe(data_prescribe = dpatient_presc, 
+                           plot_obj = p1)
+p1p
+
+p1pp <- plot_info_demographic(info_text = dpatient_demoinfo, 
+                              plot_obj = p1)
+p1pp 
+```
+
+
+
+
+```{r}
+p2 <- plot_location(loc_obj = dloc, keep_time = F)
+p2
+```
+
+
+```{r}
+library(patchwork)
+# p1 + p2 + plot_layout(ncol = 1, heights = 2:1)
+p1p + p2 + plot_layout(ncol = 1, heights = 2:1)
+p1pp + p2 + plot_layout(ncol = 1, heights = 2:1)
+```
+
+
+```{r}
+p1i <- plot_drug_prescribe_interactive(data_prescribe = dpatient_presc, 
+                                       plot_obj = p1pp)
+p1i
 ```

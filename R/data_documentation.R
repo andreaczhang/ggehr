@@ -1,3 +1,4 @@
+# ____ meta data ____ ----
 # antibiotics who----
 
 #' WHO antibiotics list
@@ -35,7 +36,26 @@
 "ab_ahus"
 
 
-# _______ ----
+# location meta ----
+
+#' Location meta-data
+#'
+#' This dataset contains information on locations at AHUS hospital. This is only 
+#'
+#' @format
+#' \describe{
+#' \item{location_code}{Location code}
+#' \item{location_display}{Location name to display. These are abbreviations}
+#' \item{type}{Type of location: ER, Postoperative, ICU or Bedward}
+#' }
+#' @examples
+#' head(location_meta)
+"location_meta"
+
+
+
+
+# ____ demo data ____ ----
 # demographics ----
 
 #' Demo data: demographics

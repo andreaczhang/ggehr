@@ -89,7 +89,6 @@ head(d1_full)
 #filter(d1_full, event_label == 'Yes')
 
 
-# ________ ----
 # plot ----
 # basic tile plot
 p <- ggplot(d1_full, aes(x = time, y = label)) + 
@@ -402,50 +401,6 @@ p1p + labs(title = text_p1) +
     ))
 
 
-
-# location ----
-de <- data.frame(x = 1:5, y = rep(1, 5), z = c('a', 'a', 'b', 'b', 'b'))
-ggplot(de, aes(x = x, y = y)) + geom_tile(aes(fill = z))
-
-loc <- ggehr::location
-loc1 <- filter(loc, ID == 1)
-loc1
-
-
-#t0 <- min(dloc$time)
-#tmax <- max(dloc$time)
-t0 <- 2254
-tmax <- 2254+112
-
-loc_long <- rbind(
-  data.frame(time = 2254:2258, loc = 'emergency_admin'), 
-  data.frame(time = 2259:2275, loc = 'uro_post'),
-  data.frame(time = 2276:2277, loc = 'sop'),
-  data.frame(time = 2278:2298, loc = 'postop'),
-  data.frame(time = 2299:tmax, loc = 'gastro_102')
-)
-
-loc_long$label <- 'Location'
-p2 <- ggplot(loc_long, aes(x = time, y = label, height = .5)) + geom_tile(aes(fill = loc))
-p2 <- p2 + theme_minimal()
-
-p2 + geom_text(aes(x = 2310, label = 'gas'))
-
-library(ggrepel)
-pp <- p2 + geom_text(aes(x = 2310, label = 'gas'))
-pp + geom_text(aes(x = 2315, label = 'gas2'))
-pp + geom_text_repel(aes(x = 2320, label = 'gas2'))
-
-p2 <- p2 + theme(legend.position = 'bottom')
-pp <- p2 + annotate('text', x = 2315, y = 1, label = 'gas')
-pp
-pp + annotate('text', x = 2318, y = 1.05, label = 'gas2')
-
-
-p1
-p1 + annotate('rect', xmin = 2276, xmax = 2280, ymin = 0, ymax = 2, color = 'black')
-library(patchwork)
-p1 + p2 + plot_layout(ncol = 1, heights = 2:1)
 
 
 
