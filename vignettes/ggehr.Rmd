@@ -1,7 +1,6 @@
 ---
 title: "Introduction to ggehr"
 author: "Chi Zhang"
-date: "2024-07-03"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to ggehr}
@@ -21,23 +20,37 @@ Electronic Health Records (EHR) data are patient records collected in healthcare
 
 The `ggehr` (read: gg E-H-R) package helps you make visualize EHR data, so that you can 
 
-* have an overview of the mixed type information related to a patient;
-* identify the errors in data recording.
+* have an **overview of the mixed type information** related to a patient;
+* **identify the errors** in data recording.
 
-In principle all data generated in real-life contain time stamps; yet in practice we tend to omit the time information. When it comes EHR data it is essential that we keep the time stamps, as they provide valuable information on what treatments and procedures have the patients been going through. Broadly speaking, 
+In principle, all data generated in real-life contain time stamps; yet in practice we tend to omit the time information. When it comes EHR data it is essential that we keep the time stamps, as they provide valuable information on what treatments and procedures have the patients been going through. Broadly speaking, 
 
-* temporal data: treatments (drug, procedures, locations)
-* static data: demographics, admission information
+* temporal data: **treatments** (drug, procedures), **locations**
+* static data: **demographics, admission information**
 
-As EHR data are usually scattered across different tables, it is beneficial to collect them altogether and visualize in one or two graphs. 
+As EHR data are usually **scattered across different tables**, it is beneficial to collect them altogether and visualize in one or two graphs. 
 
-```{r setup}
+## Antibiotics usage over time
+
+In this section we include an example of a typical use case for `ggehr`: antibiotics usage throughout the patient stay at the hospital. 
+
+
+```{r, message = FALSE}
 library(ggehr)
 library(ggplot2)
 library(dplyr)
 ```
 
+We load some data from a *fictional* patient. The data used is fictional, however illustrates the complexity of data of this kind quite well. To learn more about EHR data used in the demonstration, please read this document: [Types of EHR data](https://andreaczhang.github.io/ggehr/articles/types_of_data.html).
 
+We include the following data types:
+
+* `ab_use`: antibiotics use over time
+* `ab_prescription`: antibiotics prescription information
+* `demographics`: demographics, type of admission, department information
+* `location`: location where the patient had been to in the hospital. This can serve as a proxy for any **surgical operations, intensive care**.
+
+In the future we can also add the types of procedures (such as catheters), physiological scores etc if they become available.
 
 ```{r}
 ab_use <- ggehr::ab_use
@@ -49,20 +62,43 @@ loc <- ggehr::location
 ab_use <- dplyr::rename(ab_use, label = ab_name)
 ab_use <- dplyr::rename(ab_use, method = ab_method)
 
-# get the information on drugs
-abinfo <- ggehr::ab_ahus
-```
-
-
-
-```{r}
+# we focus on patient ID == 1
 id <- 1
 
 dpatient_demog <- filter(demographics, ID == id)
 dpatient_drug <- filter(ab_use, ID == id)
 dpatient_presc <- filter(ab_prescription, ID == id)
 dpatient_loc <- filter(loc, ID == id)
+```
 
+### Antibiotics AWaRe 
+
+We include metadata on the antibiotics in the package, for the purpose of categorizing drug types. At the moment we use [WHO AWaRe](https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2023.04) categorization for antibiotics:
+
+* A: access, use freely;
+* Wa: watch, use with caution;
+* Re: reserve, use as last-resort cases.
+
+We shall use the category to color the antibiotics.
+
+```{r}
+# ab_ahus provides a narrowed down list (with norwegian language)
+abinfo <- ggehr::ab_ahus
+abinfo[c(1,4,5),] # print out some examples
+```
+
+Get the complete WHO list as a dataset with `ggehr::ab_who`, 
+
+```{r}
+ggehr::ab_who[1:3,]
+```
+
+
+### Plot drug use
+
+Each drug use has a time stamp. We would like to have visualize the uses over the patient's admission and discharge time, which is included in the demographics table.
+
+```{r}
 # add drug information 
 dpatient_drug <- left_join(dpatient_drug, abinfo, 
                            join_by(label == Norsk_AHUS))
@@ -72,52 +108,79 @@ dpatient_drug <- left_join(dpatient_drug, abinfo,
 tadmin <- dpatient_demog$t0
 tdischarge <- tadmin + dpatient_demog$los
 
-
-
 # drug use ----#
 d <- make_event_drug_use(dpatient_drug, 
                          tmin = tadmin, 
                          tmax = tdischarge)
-```
 
-```{r}
-# demographics ----# 
-dpatient_demoinfo <- make_demographic_info(demo_df = dpatient_demog)
-
-
-
-
-# location ----#
-dloc <- make_location(data_location = dpatient_loc, 
-                      tadmin = dpatient_demog$t0, 
-                      los = dpatient_demog$los)
-
-```
-
-
-
-```{r}
-# drug use 
 p1 <- plot_drug_use(data_drug_use = d)
 p1
+```
+
+
+## Prescription time and unused drugs
+
+It is convenient to add the times for antibiotics prescription on the drug use figure. There are a few reasons why this is useful:
+
+* sometimes the prescription form is filled by different staff, resulting inconsistency in data registration in **drug types, time of prescription**;
+* drug prescription form could contain **reasons** as why this drug is prescribed, for example, if it's for a surgery prophylactic (prevention) or sepsis infection treatment; if it's for an infection acquired in the community or at the hospital.
+
+```{r}
 # drug prescription
 p1p <- plot_drug_prescribe(data_prescribe = dpatient_presc, 
                            plot_obj = p1)
 p1p
+```
 
+In this figure it is clear to see that two drugs are unused even though prescribed; and recording times are sensible - prescription before use.
+
+
+## Interactive prescription
+
+Additional information for prescription can be added interactively. 
+
+```{r}
+p1i <- plot_drug_prescribe_interactive(data_prescribe = dpatient_presc, 
+                                       plot_obj = p1p)
+p1i
+```
+
+## Add static information card
+
+It is often useful to add background information for the patient so that we have a better idea on the type of admission, length of stay as well as demographics. As these information are without time stamps, they can be added as a card next to the drug use plot.
+
+
+```{r}
+# demographics ----# 
+dpatient_demoinfo <- make_demographic_info(demo_df = dpatient_demog)
+dpatient_demoinfo
+```
+
+The function `make_demographic_info()` extract and parses the relevant information so that it can be added in the existing plot.
+
+
+```{r}
 p1pp <- plot_info_demographic(info_text = dpatient_demoinfo, 
                               plot_obj = p1)
 p1pp 
 ```
 
 
+## Location
 
+It can be helpful to know where the patient have been to in the hospital, both for **infection control** and as a proxy for events such as surgery and intensive care.
 
 ```{r}
+# location ----#
+dloc <- make_location(data_location = dpatient_loc, 
+                      tadmin = dpatient_demog$t0, 
+                      los = dpatient_demog$los)
+
 p2 <- plot_location(loc_obj = dloc, keep_time = F)
 p2
 ```
 
+Put together multiple plots 
 
 ```{r}
 library(patchwork)
@@ -127,8 +190,3 @@ p1pp + p2 + plot_layout(ncol = 1, heights = 2:1)
 ```
 
 
-```{r}
-p1i <- plot_drug_prescribe_interactive(data_prescribe = dpatient_presc, 
-                                       plot_obj = p1pp)
-p1i
-```

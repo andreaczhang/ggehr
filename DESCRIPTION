@@ -1,10 +1,10 @@
 Package: ggehr
 Title: ggplot2 extension to Electronic Health Records data
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person("Chi", "Zhang", , "chizapoth@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0501-5909"))
-Description: This package aims to visualize Electronic Health Records in a intuitive way. 
+Description: This package is the ggplot2 extension for Electronic Health Records (EHR) data.
 License: MIT + file LICENSE
 URL: https://github.com/andreaczhang/ggehr
 BugReports: https://github.com/andreaczhang/ggehr/issues

@@ -1,0 +1,14 @@
+---
+title: "Types of EHR data"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Type of EHR data
+
+(This doc is to be finished)

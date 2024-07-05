@@ -1,3 +1,3 @@
-# ggehr 2023.06.02
+# ggehr 2024.7.5
 
-* Created package
+Package version 0.1.0 implemented.
