@@ -1,4 +1,4 @@
-# ggehr <a href="https://andreaczhang.github.io/ggehr/"><img src="man/figures/hex_ggehr.png" align="right" width="150" /></a>
+# ggehr <a href="https://andreaczhang.github.io/ggehr/"><img src="man/figures/logo.png" align="right" width="150" /></a>
 
 
 <!-- badges: start -->

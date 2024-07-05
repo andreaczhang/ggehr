@@ -2,8 +2,9 @@ pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  gallery: gallery.html
   ggehr: ggehr.html
-last_built: 2024-07-04T16:41Z
+last_built: 2024-07-05T09:59Z
 urls:
   reference: https://andreaczhang.github.io/ggehr/reference
   article: https://andreaczhang.github.io/ggehr/articles

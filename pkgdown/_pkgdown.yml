@@ -1,0 +1,68 @@
+url: https://andreaczhang.github.io/ggehr/
+template:
+  bootstrap: 5
+  bootswatch: simplex
+  bslib:
+    primary: "#9ebbc6"
+    base_font: {google: "Atkinson Hyperlegible"}
+    heading_font: {google: "Atkinson Hyperlegible"}
+    text-muted: "#FFFFFF"
+
+authors:
+  Chi Zhang:
+    href: "https://andreaczhang.github.io"
+
+navbar:
+  bg: primary
+  structure:
+    left:  [intro, reference, tutorials, news]
+    right: [search, github]
+  left:
+    - icon: fa-home
+      href: index.html
+    - text: Reference
+      href: reference/index.html
+    - text: Gallery
+      href: articles/gallery.html
+    #- text: Articles
+    #  menu:
+    #  - text: "Themes"
+    #    href: articles/themes.html
+    - text: News
+      href: news/index.html
+
+reference:
+  - title: Data processing
+  - contents:
+      - loc_expand
+      - make_demographic_info
+      - make_event_drug_use
+      - make_location
+      
+  - title: Plots
+  - contents:
+      - plot_drug_use
+      - plot_drug_prescribe
+      - plot_drug_prescribe_interactive
+      - plot_info_demographic
+      - plot_location
+      - breakpoints
+      
+  - title: Demo data 
+  - contents:
+      - ab_prescription
+      - ab_use
+      - catheters
+      - demographics
+      - location
+     
+  - title: Meta data
+  - contents:
+      - ab_ahus
+      - ab_who
+      - location_meta
+
+  - title: Placeholder (to delete)
+  - contents:
+      - f1
+      
