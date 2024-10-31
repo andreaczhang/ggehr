@@ -1,6 +1,6 @@
 Package: ggehr
 Title: ggplot2 extension to Electronic Health Records data
-Version: 0.1.0
+Version: 0.0.0.9000
 Authors@R: 
     person("Chi", "Zhang", , "chizapoth@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0501-5909"))

@@ -3,8 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   ggehr: ggehr.html
-  types_of_data: types_of_data.html
-last_built: 2024-07-05T13:48Z
+last_built: 2024-10-31T09:09Z
 urls:
   reference: https://andreaczhang.github.io/ggehr/reference
   article: https://andreaczhang.github.io/ggehr/articles

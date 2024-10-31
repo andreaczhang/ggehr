@@ -24,10 +24,10 @@ navbar:
       href: reference/index.html
     - text: Get Started
       href: articles/ggehr.html
-    - text: Articles
-      menu:
-      - text: 'Types of EHR data'
-        href: articles/types_of_data.html
+#    - text: Articles
+#      menu:
+#      - text: 'Types of EHR data'
+#        href: articles/types_of_data.html
     - text: News
       href: news/index.html
 
@@ -63,7 +63,7 @@ reference:
       - ab_who
       - location_meta
 
-  - title: Placeholder (to delete)
-  - contents:
-      - f1
+#  - title: Placeholder (to delete)
+#  - contents:
+#      - f1
       
