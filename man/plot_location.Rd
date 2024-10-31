@@ -2,22 +2,22 @@
 % Please edit documentation in R/plot_functions.R
 \name{plot_location}
 \alias{plot_location}
-\title{Make drug use events}
+\title{Plot location}
 \usage{
 plot_location(loc_obj, keep_text = T, keep_legend = F, keep_time = T)
 }
 \arguments{
-\item{loc_obj}{drug dataframe}
+\item{loc_obj}{location object}
 
-\item{keep_text}{tmin}
+\item{keep_text}{Keep text. Logical, default is True}
 
-\item{keep_legend}{tmax}
+\item{keep_legend}{Keep legend. Logical, default is True}
 
-\item{keep_time}{description}
+\item{keep_time}{Keep time. Logical, default is True}
 }
 \value{
-A dataframe with drug uses
+A plot of location information
 }
 \description{
-Collect results from the new diet discovery, along with the current diet.
+Plot location information as color blocks
 }

@@ -2,18 +2,18 @@
 % Please edit documentation in R/plot_functions.R
 \name{plot_drug_prescribe_interactive}
 \alias{plot_drug_prescribe_interactive}
-\title{Make drug use events}
+\title{Plot drug prescription interactively with additional information}
 \usage{
 plot_drug_prescribe_interactive(data_prescribe, plot_obj)
 }
 \arguments{
-\item{data_prescribe}{drug dataframe}
+\item{data_prescribe}{drug prescription dataframe}
 
-\item{plot_obj}{tmin}
+\item{plot_obj}{plot object from drug use}
 }
 \value{
-A datafrme with drug uses
+An enhanced plot with drug prescription events
 }
 \description{
-Collect results from the new diet discovery, along with the current diet.
+Plot drug prescription interactively with additional information
 }

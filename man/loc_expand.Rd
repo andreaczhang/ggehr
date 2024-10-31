@@ -7,11 +7,11 @@
 loc_expand(x)
 }
 \arguments{
-\item{x}{data}
+\item{x}{location dataframe}
 }
 \value{
-A dataframe with drug uses
+a datatable with timestamps and location code
 }
 \description{
-Collect results from the new diet discovery, along with the current diet.
+Expand location for the plot as color-blocks. Typically used inside function: make_location()
 }

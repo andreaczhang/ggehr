@@ -16,25 +16,25 @@ make_demographic_info(
 )
 }
 \arguments{
-\item{demo_df}{drug dataframe}
+\item{demo_df}{Demographics dataframe}
 
-\item{keep_id}{tmin}
+\item{keep_id}{Whether to keep ID. Logical, default is True}
 
-\item{keep_sex}{tmax}
+\item{keep_sex}{Whether to keep sex. Logical, default is True}
 
-\item{keep_age}{description}
+\item{keep_age}{Whether to keep age. Logical, default is True}
 
-\item{keep_dept}{t}
+\item{keep_dept}{Whether to keep department. Logical, default is True}
 
-\item{keep_admtype}{t}
+\item{keep_admtype}{Whether to keep admission type. Logical, default is True}
 
-\item{keep_t0}{t}
+\item{keep_t0}{Whether to keep T0. Logical, default is True}
 
-\item{keep_los}{t}
+\item{keep_los}{Whether to keep LOS (length of stay). Logical, default is True}
 }
 \value{
-A datafrme with drug uses
+A parsed string with demographic information
 }
 \description{
-Collect results from the new diet discovery, along with the current diet.
+Prepare data: demographics for the static information card
 }

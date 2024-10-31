@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_functions.R
 \name{plot_drug_use}
 \alias{plot_drug_use}
-\title{Make drug use events}
+\title{Plot drug use over time}
 \usage{
 plot_drug_use(data_drug_use)
 }
@@ -10,8 +10,8 @@ plot_drug_use(data_drug_use)
 \item{data_drug_use}{drug dataframe}
 }
 \value{
-A plot
+A plot that visualizes drug use events over time
 }
 \description{
-Collect results from the new diet discovery, along with the current diet.
+Plot drug use over time. For antibiotics, a tricolor systme (WHO AWaRe) is applied.
 }

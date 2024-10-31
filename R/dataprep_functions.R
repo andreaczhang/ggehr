@@ -1,13 +1,13 @@
 #' Make drug use events
 #' 
 #' @description
-#' Collect results from the new diet discovery, along with the current diet.
+#' Prepare data: drug events for the plot
 #' 
 #' @param drug_df drug dataframe
-#' @param tmin tmin
-#' @param tmax tmax
+#' @param tmin Minimum time
+#' @param tmax Maximum time
 #' @import dplyr
-#' @return A datafrme with drug uses
+#' @return A dataframe with drug uses
 #' @export
 
 
@@ -44,17 +44,17 @@ make_event_drug_use <- function(drug_df,
 #' Make demographic info
 #' 
 #' @description
-#' Collect results from the new diet discovery, along with the current diet.
+#' Prepare data: demographics for the static information card
 #' 
-#' @param demo_df drug dataframe
-#' @param keep_id tmin
-#' @param keep_sex tmax
-#' @param keep_age description
-#' @param keep_dept t
-#' @param keep_admtype t
-#' @param keep_t0 t
-#' @param keep_los t
-#' @return A datafrme with drug uses
+#' @param demo_df Demographics dataframe
+#' @param keep_id Whether to keep ID. Logical, default is True
+#' @param keep_sex Whether to keep sex. Logical, default is True
+#' @param keep_age Whether to keep age. Logical, default is True
+#' @param keep_dept Whether to keep department. Logical, default is True
+#' @param keep_admtype Whether to keep admission type. Logical, default is True
+#' @param keep_t0 Whether to keep T0. Logical, default is True
+#' @param keep_los Whether to keep LOS (length of stay). Logical, default is True
+#' @return A parsed string with demographic information
 #' @export
 
 make_demographic_info <- function(demo_df, 
@@ -145,13 +145,13 @@ make_demographic_info <- function(demo_df,
 #' Make location
 #' 
 #' @description
-#' Collect results from the new diet discovery, along with the current diet.
+#' Prepare data for the plot: location
 #' 
-#' @param data_location drug dataframe
-#' @param tadmin tmin
-#' @param los tmax
+#' @param data_location location data
+#' @param tadmin Time of admission
+#' @param los Length of stay (in hours)
 #' @importFrom dplyr left_join
-#' @return A datafrme with drug uses
+#' @return A dataframe with location
 #' @export
 
 make_location <- function(data_location, 
@@ -206,10 +206,10 @@ make_location <- function(data_location,
 #' Expand location
 #' 
 #' @description
-#' Collect results from the new diet discovery, along with the current diet.
+#' Expand location for the plot as color-blocks. Typically used inside function: make_location()
 #' 
-#' @param x data
-#' @return A dataframe with drug uses
+#' @param x location dataframe
+#' @return a datatable with timestamps and location code
 #' @export
 
 loc_expand <- function(x){

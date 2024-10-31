@@ -9,13 +9,13 @@ make_event_drug_use(drug_df, tmin = NULL, tmax = NULL)
 \arguments{
 \item{drug_df}{drug dataframe}
 
-\item{tmin}{tmin}
+\item{tmin}{Minimum time}
 
-\item{tmax}{tmax}
+\item{tmax}{Maximum time}
 }
 \value{
-A datafrme with drug uses
+A dataframe with drug uses
 }
 \description{
-Collect results from the new diet discovery, along with the current diet.
+Prepare data: drug events for the plot
 }

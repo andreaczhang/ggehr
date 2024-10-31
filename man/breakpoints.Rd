@@ -2,18 +2,18 @@
 % Please edit documentation in R/plot_functions.R
 \name{breakpoints}
 \alias{breakpoints}
-\title{Make drug use events}
+\title{Breakpoint}
 \usage{
 breakpoints(x, n = 8)
 }
 \arguments{
-\item{x}{drug dataframe}
+\item{x}{time vector}
 
-\item{n}{tmin}
+\item{n}{number of breakpoints}
 }
 \value{
-A datafrme with drug uses
+a vector of breakpoints
 }
 \description{
-Collect results from the new diet discovery, along with the current diet.
+Make pretty break points for plotting
 }

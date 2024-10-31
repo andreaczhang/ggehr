@@ -1,10 +1,10 @@
-#' Make drug use events
+#' Plot drug use over time
 #' 
 #' @description
-#' Collect results from the new diet discovery, along with the current diet.
+#' Plot drug use over time. For antibiotics, a tricolor systme (WHO AWaRe) is applied.
 #' 
 #' @param data_drug_use drug dataframe
-#' @return A plot
+#' @return A plot that visualizes drug use events over time
 #' @export
 
 
@@ -45,14 +45,14 @@ plot_drug_use <- function(data_drug_use){
 
 
 
-#' Make drug use events
+#' Plot drug prescription
 #' 
 #' @description
-#' Collect results from the new diet discovery, along with the current diet.
+#' Plot drug prescription events over time, on top of drug use plot. It is necessary to supply a drug use plot first.
 #' 
-#' @param data_prescribe drug dataframe
-#' @param plot_obj tmin
-#' @return A datafrme with drug uses
+#' @param data_prescribe drug prescription dataframe
+#' @param plot_obj plot object from drug use
+#' @return An enhanced plot with drug prescription events
 #' @export
 
 plot_drug_prescribe <- function(data_prescribe, plot_obj){
@@ -68,15 +68,15 @@ plot_drug_prescribe <- function(data_prescribe, plot_obj){
 
 
 
-#' Make drug use events
+#' Plot drug prescription interactively with additional information
 #' 
 #' @description
-#' Collect results from the new diet discovery, along with the current diet.
+#' Plot drug prescription interactively with additional information
 #' 
-#' @param data_prescribe drug dataframe
-#' @param plot_obj tmin
+#' @param data_prescribe drug prescription dataframe
+#' @param plot_obj plot object from drug use
 #' @import ggiraph
-#' @return A datafrme with drug uses
+#' @return An enhanced plot with drug prescription events
 #' @export
 
 plot_drug_prescribe_interactive <- function(data_prescribe, 
@@ -110,15 +110,15 @@ plot_drug_prescribe_interactive <- function(data_prescribe,
 }
 
 
-#' Make drug use events
+#' Plot demographic information card
 #' 
 #' @description
-#' Collect results from the new diet discovery, along with the current diet.
+#' Plot demographic information card
 #' 
-#' @param info_text drug dataframe
-#' @param plot_obj tmin
+#' @param info_text Text information, parsed to be plotted. See make_demographic_info() for more.
+#' @param plot_obj plot object from drug use
 #' @import ggtext
-#' @return A datafrme with drug uses
+#' @return An enhanced plot that has demographic information
 #' @export
 
 plot_info_demographic <- function(info_text, plot_obj){
@@ -140,16 +140,16 @@ plot_info_demographic <- function(info_text, plot_obj){
 }
 
 
-#' Make drug use events
+#' Plot location 
 #' 
 #' @description
-#' Collect results from the new diet discovery, along with the current diet.
+#' Plot location information as color blocks
 #' 
-#' @param loc_obj drug dataframe
-#' @param keep_text tmin
-#' @param keep_legend tmax
-#' @param keep_time description
-#' @return A dataframe with drug uses
+#' @param loc_obj location object
+#' @param keep_text Keep text. Logical, default is True
+#' @param keep_legend Keep legend. Logical, default is True
+#' @param keep_time Keep time. Logical, default is True
+#' @return A plot of location information
 #' @export
 
 plot_location <- function(loc_obj, 
@@ -215,14 +215,14 @@ plot_location <- function(loc_obj,
 }
 
 
-#' Make drug use events
+#' Breakpoint
 #' 
 #' @description
-#' Collect results from the new diet discovery, along with the current diet.
+#' Make pretty break points for plotting
 #' 
-#' @param x drug dataframe
-#' @param n tmin
-#' @return A datafrme with drug uses
+#' @param x time vector
+#' @param n number of breakpoints
+#' @return a vector of breakpoints
 #' @export
 
 breakpoints <- function(x, n=8){

@@ -2,18 +2,18 @@
 % Please edit documentation in R/plot_functions.R
 \name{plot_info_demographic}
 \alias{plot_info_demographic}
-\title{Make drug use events}
+\title{Plot demographic information card}
 \usage{
 plot_info_demographic(info_text, plot_obj)
 }
 \arguments{
-\item{info_text}{drug dataframe}
+\item{info_text}{Text information, parsed to be plotted. See make_demographic_info() for more.}
 
-\item{plot_obj}{tmin}
+\item{plot_obj}{plot object from drug use}
 }
 \value{
-A datafrme with drug uses
+An enhanced plot that has demographic information
 }
 \description{
-Collect results from the new diet discovery, along with the current diet.
+Plot demographic information card
 }

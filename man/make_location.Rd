@@ -7,15 +7,15 @@
 make_location(data_location, tadmin, los)
 }
 \arguments{
-\item{data_location}{drug dataframe}
+\item{data_location}{location data}
 
-\item{tadmin}{tmin}
+\item{tadmin}{Time of admission}
 
-\item{los}{tmax}
+\item{los}{Length of stay (in hours)}
 }
 \value{
-A datafrme with drug uses
+A dataframe with location
 }
 \description{
-Collect results from the new diet discovery, along with the current diet.
+Prepare data for the plot: location
 }
